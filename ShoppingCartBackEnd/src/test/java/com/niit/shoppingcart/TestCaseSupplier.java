@@ -1,0 +1,70 @@
+package com.niit.shoppingcart;
+
+import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.niit.shoppingcart.dao.SupplierDAO;
+import com.niit.shoppingcart.model.Supplier;
+
+public class TestCaseSupplier {
+
+	@Autowired
+	SupplierDAO supplierDAO;
+	@Autowired
+	Supplier supplier;
+	
+	AnnotationConfigApplicationContext context;
+	
+	@Before
+	public void init()
+	{
+		context = new AnnotationConfigApplicationContext();
+		context.scan("com.niit");
+		context.refresh();
+		supplierDAO = (SupplierDAO)context.getBean("supplierDAO");
+		supplier = (Supplier)context.getBean("supplier");
+	}
+	
+	/*@Test
+	public void supplierListTestCase()
+	{
+		List<Supplier> list = supplierDAO.list();
+		int rowCount = list.size();
+		assertEquals("Supplier List Test Case", rowCount,2);
+	}
+	*/
+	@Test
+	public void supplierAddTestCase()
+	{
+		supplier.setId("MOB_0001");
+		supplier.setName("hftrd");
+		supplier.setAddress("this is lenovo");
+		boolean flag = supplierDAO.save(supplier);
+		assertEquals(flag, true);
+	}
+	
+	/*@Test
+	public void deleteTestCase(){
+		supplier.setId("MOB_002");
+		assertEquals(supplierDAO.delete(supplier),true);
+	}
+	
+	@Test
+	public void updateTestCase(){
+		supplier.setId("MOB_003");
+		supplier.setName("asus");
+		supplier.setAddress("this is asus");
+		assertEquals(supplierDAO.update(supplier),true);
+	}
+	
+	@Test
+	public void getSupplierTestCase(){
+	supplier=supplierDAO.get("MOB_003");
+	System.out.println(supplier.getAddress());
+	assertEquals(supplier.getName(), "asus");
+	}*/
+
+}
