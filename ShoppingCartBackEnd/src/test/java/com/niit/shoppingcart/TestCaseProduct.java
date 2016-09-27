@@ -2,24 +2,41 @@ package com.niit.shoppingcart;
 
 import static org.junit.Assert.*;
 
-
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
+import com.niit.shoppingcart.dao.SupplierDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.Supplier;
 
 public class TestCaseProduct {
 
 	@Autowired
 	ProductDAO productDAO;
+	
+	@Autowired
+	CategoryDAO categoryDAO;
+	
 	@Autowired
 	Product product;
+	
+	@Autowired
+Supplier supplier;
+	
+	@Autowired
+	SupplierDAO supplierDAO;
+	
+	@Autowired
+	Category category ; 
 	
 	AnnotationConfigApplicationContext context;
 	
@@ -34,18 +51,43 @@ public class TestCaseProduct {
 	}
 	
 	
-	/*
 	@Test
 	public void productAddTestCase()
 	{
-		product.setId("PRO_002");
-		product.setName("dell");
-		product.setDescription("this is dell");
-		product.setPrice("70000");
+	/*Category category=new Category();
+		category.setCat_id("CAT002");
+		category.setCat_name("mobile");
+		category.setCat_description("MOBILES");
 		
-		assertEquals(productDAO.save(product),true);
-	}
+		
+		Supplier supplier=new Supplier();
+		supplier.setSup_id("SUP002");
+		supplier.setSup_name("RELAINCE");
+		supplier.setSup_address("hyd");
 	
+		Product product=new Product();*/
+		
+		
+		product.setPro_id("PRO223");
+		product.setPro_name("birthday");
+		product.setPro_description("birthday gift");
+		product.setPro_price("15125000"); 
+		product.setCategory_id("12M51A0452");
+		product.setSupplier_id("12M51A0450");
+		 //productDAO.save(product);
+		 assertEquals(productDAO.save(product),true);
+		/*(category.getProducts()).add(product);
+		
+		
+		(supplier.getProducts()).add(product);
+	
+		
+		 categoryDAO.save(category);
+		supplierDAO.save(supplier);*/
+	
+	}
+
+	/*
 	
 	@Test
 	public void productListTestCase()
@@ -70,13 +112,13 @@ public class TestCaseProduct {
 		assertEquals(productDAO.update(product),true);
 	}
 */
-	@Test
+	/*@Test
 	public void getProductTestCase(){
-		product=productDAO.get("PRO_002");
+		product=productDAO.get("PRO_003");
 		System.out.println(product.getDescription());
-		assertEquals(product.getName(),"asus");
+		assertEquals(product.getName(),"dell");
 	}
-	
+	*/
 	
 	
 	

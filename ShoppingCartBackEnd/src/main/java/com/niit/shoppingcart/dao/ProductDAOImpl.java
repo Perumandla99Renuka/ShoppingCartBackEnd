@@ -61,8 +61,8 @@ public class ProductDAOImpl implements ProductDAO {
 		}
 	}
 	@Transactional
-	public Product get(String id) {
-		String  hql = " from Product where id ="+"'"+id+"'";
+	public Product get(String pro_id) {
+		String  hql = " from Product where id ="+"'"+pro_id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Product> list = query.list();
 		if(list == null||list.isEmpty())

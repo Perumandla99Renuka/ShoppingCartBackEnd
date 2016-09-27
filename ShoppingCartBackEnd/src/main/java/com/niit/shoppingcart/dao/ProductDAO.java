@@ -14,7 +14,7 @@ public interface ProductDAO {
 
 	public boolean delete(Product product);
 
-	public Product get(String id);
+	public Product get(String pro_id);
 
 	public List<Product> list();
 }

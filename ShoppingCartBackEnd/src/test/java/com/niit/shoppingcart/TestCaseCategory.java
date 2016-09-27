@@ -4,75 +4,85 @@ import static org.junit.Assert.*;
 
 
 
-
-
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
+import java.util.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
+import com.niit.shoppingcart.dao.ProductDAO;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Product;
 
 public class TestCaseCategory {
 
 	@Autowired
 	CategoryDAO categoryDAO;
 	@Autowired
+	ProductDAO productDAO;
+	@Autowired
 	Category category;
-	
-	AnnotationConfigApplicationContext context;
+	@Autowired
+	Product product;
+
 	
 	@Before
 	public void init()
 	{
-		context = new AnnotationConfigApplicationContext();
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
 		categoryDAO = (CategoryDAO)context.getBean("categoryDAO");
 		category = (Category)context.getBean("category");
+	product = (Product)context.getBean("product");
+	;
 	}
-	
-/*	@Test
-	public void categoryListTestCase()
-	{
-		List<Category> list = categoryDAO.list();
-		int rowCount = list.size();
-		assertEquals("Category List Test Case", rowCount,2);
-	}*/
 	
 	@Test
 	public void categoryAddTestCase()
 	{
-		category.setId("MOB_0001");
-		category.setName("hftrd");
-		category.setDescription("this is lenovo");
-		boolean flag = categoryDAO.save(category);
-		assertEquals(flag, true);
+	
+			category.setCat_id("12M51A0452");
+			category.setCat_name("renu");
+			category.setCat_description("this is lenovo");
+		assertEquals(categoryDAO.save(category), true);
 	}
 	
+	
+	
+	/*@Test
+	public void categoryListTestCase()
+	{
+		List<Category> list = categoryDAO.list();
+		int rowCount = list.size();
+		assertEquals("Category List Test Case", rowCount,1);
+	}*/
+/*	
 	@Test
 	public void deleteTestCase(){
-		category.setId("MOB_002");
+		category.setId("card001");
 		assertEquals(categoryDAO.delete(category),true);
 	}
-	
+*/
+	/*
 	@Test
 	public void updateTestCase(){
 		category.setId("MOB_003");
 		category.setName("asus");
-		category.setDescription("this is asus");
+		category.setDescription("this is asus phone");
 		assertEquals(categoryDAO.update(category),true);
-	}
-	
-	@Test
+	}*/
+
+	/*@Test
 	public void getCategoryTestCase(){
-	category=categoryDAO.get("MOB_003");
+	category=categoryDAO.get("");
 	System.out.println(category.getDescription());
-	assertEquals(category.getName(), "asus");
-	}
+	assertEquals(category.getName(), "mobile");
+	}*/
 	
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Supplier;
 
 @Repository("supplierDAO")
@@ -53,11 +54,11 @@ public class SupplierDAOImpl implements SupplierDAO {
 		}
 	}
 	@Transactional
-	public Supplier get(String id) {
-		String  hql = " from Supplier where id ="+"'"+id+"'";
+	public Supplier get(String sup_id) {
+		String  hql = " from Supplier where id ="+"'"+sup_id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Supplier> list = query.list();
-		if(list == null)
+		if(list == null || list.isEmpty())
 		{
 			return null;
 		}
@@ -71,6 +72,21 @@ public class SupplierDAOImpl implements SupplierDAO {
 		String hql = "from Supplier";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
+	}
+	
+	@Transactional
+	public Supplier getByName(String sup_name){
+		String hql= " from Supplier where sup_name ="+"'"+sup_name+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Supplier> list = (List<Supplier>) query.list();
+		if(list != null && !list.isEmpty())
+		{
+			return list.get(0);
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 }

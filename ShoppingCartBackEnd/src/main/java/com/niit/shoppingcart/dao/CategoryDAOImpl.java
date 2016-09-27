@@ -60,8 +60,8 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 	}
 	@Transactional
-	public Category get(String id) {
-		String  hql = " from Category where id ="+"'"+id+"'";
+	public Category get(String cat_id) {
+		String  hql = " from Category where id ="+"'"+cat_id+"'";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Category> list = query.list();
 		if(list == null || list.isEmpty())
@@ -79,5 +79,21 @@ public class CategoryDAOImpl implements CategoryDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
+	
+	@Transactional
+	public Category getByName(String cat_name){
+		String hql= " from Category where cat_name ="+"'"+cat_name+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<Category> list = (List<Category>) query.list();
+		if(list != null && !list.isEmpty())
+		{
+			return list.get(0);
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
 
 }

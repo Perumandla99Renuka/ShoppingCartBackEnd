@@ -3,6 +3,7 @@ package com.niit.shoppingcart.dao;
 import java.util.List;
 
 
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,9 +13,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.model.UserDetails;
-
-@EnableTransactionManagement
 @Repository("userDetailsDAO")
+@EnableTransactionManagement
+
 public class UserDetailsDAOImpl implements UserDetailsDAO {
 	
 	@Autowired
@@ -75,5 +76,23 @@ public class UserDetailsDAOImpl implements UserDetailsDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return query.list();
 	}
+	
+	@Transactional
+	public boolean isValidUser(String id, String password) {
+		
+		String hql="from UserDetails where id='"+id+"' and password='"+password+"'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<UserDetails>  list=query.list();
+		if(list!=null|| !list.isEmpty()){
+	
+			return true;
+		}
+			
+				return false;
+			
+		}
+		
+		
+	
 
 }

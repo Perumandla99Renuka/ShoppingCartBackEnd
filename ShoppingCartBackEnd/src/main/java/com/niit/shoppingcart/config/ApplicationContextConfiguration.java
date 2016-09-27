@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.Supplier;
@@ -53,6 +54,7 @@ public class ApplicationContextConfiguration {
 		sessionBuilder.addAnnotatedClasses(Product.class);
 		sessionBuilder.addAnnotatedClasses(Supplier.class);
 		sessionBuilder.addAnnotatedClasses(UserDetails.class);
+		sessionBuilder.addAnnotatedClasses(Cart.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 
